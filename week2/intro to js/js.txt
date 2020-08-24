@@ -1,0 +1,72 @@
+push()
+pop()
+
+
+#traversing
+eg.forEach((element)=> {
+console.log(element)
+});
+
+#object in js
+let example1 = {
+    firstName: 'Dylan',
+    lastName: 'Israel',
+    address: {
+        city: 'Austin',
+        state: 'Texas'
+    },
+    age: 30,
+    cats: ['Milo', 'Tito', 'Achieles']
+};
+
+example1.age = 31;
+console.log(example1.age);
+console.log(example1.hasOwnProperty('firstName2'));
+
+
+#nested object 
+const user = {
+    firstName: 'Dylan',
+    lastName: 'Israel'
+};
+
+user['address'] = {
+    city: 'Tampa',
+    state: 'Florida'
+};
+
+user.hobbies = ['Anime', 'Coding', 'Dating', 'Gaming'];
+user.isGoldMember = true;
+
+console.log(user);
+
+
+#switch in js
+let studentAnswer = 'D';
+
+switch(studentAnswer) {
+    case 'A': 
+        console.log('A is wrong.');
+        break;
+    case 'B' :
+        console.log('B is wrong.');
+        break;
+    case 'C':
+        console.log('C is correct.');
+        break;
+    default: 
+        console.log('Not a real answer.');
+}
+
+
+#loops
+let total = 0;
+
+let numArray = [10, 20, 30, 40, 50, 60, 70, 80, 90];
+
+for (let i = 0; i < numArray.length; i++) {
+    
+    total += numArray[i];
+}
+
+console.log(total);
