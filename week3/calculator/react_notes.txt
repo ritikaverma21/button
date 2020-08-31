@@ -1,0 +1,412 @@
+React is a open source library for building user interfaces. It is not a framework.
+It is created and maintained by facebook.
+React is component based architecture. This let us breakdown our application into small encapsulated parts which can then be composed tomake more complicated UI.
+React is declarative that means we tell react what we want and react will build the actual UI.
+
+------------------------------------------------------------------
+
+Download and install Node js
+Open VsCode and create a new folder named as React.
+
+Steps to create a new Application (project) in React. There are 2 ways of doing this. First one is using NPX and second is NPM.
+Now open the terminal and type the following command:
+1. npx create-react-app hello-world (this command let us create a     new application without doing any configurations, where hello-     world is the app name).
+   npx is a NPM package runner which gets installed when we        install node 
+2. cd hello-world
+3. npm start (This command will open the browser on localhost port    3000 with your hello-world application up and running. When we    run this command, index.html is served in the browser)
+4. After this, edit src/app.js and save it.
+
+We have created a new app using npx (shown above). We can do the same using npm also. In this approach we installed the create react app package globally and use the package to generate the projects. Follow the commands written below:
+1. npm install create-react-app -g
+2. create-react-app <project_name>
+
+------------------------------------------------------------------
+
+Folder Structure:
+->package.json - This file conatins the dependencies and scripts required for the project.
+->node-modules - This is the folder in which all the dependencies are installed.It is created when you run create react app command or you run NPM install.
+->public - This folder contains 3 files. Out of the 3, manifest.json is concerned with progressive apps. second is favicon.ico in which you see in the browser tab and this nothing react specific. Third one is index.html file which is the only file you are going to have in your application. index.html file contains the root DOM node. Typically we are not going to add any code in index.html file may be some changes in haed tag but definitely not in the body tag.
+->src - This is the folder in which we will working most during development.
+->index.js - In this file, we specify the root component which is app component and DOM element which will be controlled by react. The DOM element in our ex. is an element with an ID of root and if we recollect this element in our index.html file , we call this div element as the root DOM node because everything inside it will be controlled by react. App component represents the view which   we see in the browser.
+->index.css - This file apply styles to the body tag.
+->logo.svg - It is referenced in the app component.
+serviceWorker.js - It is concerned with progressive web apps
+
+------------------------------------------------------------------
+
+When we run the command npm start, index.html is served in the browser. index.html file contains the root DOM node, next control enters in index.js. react DOM renders the app component on to the root DOM node. The app component contains the html which is ultimately displayed in the browser.
+
+------------------------------------------------------------------
+
+What are Components:
+Component code is placed in js file, for ex AppComponent is placed in app.js. In react we have two types of component:
+1. Stateless Functional Component are generally js functions that    return html which describes UI.
+   Example: function welcome(props)
+   {
+   return <h1>hello, {props.name}</h1>;
+   }
+2. Stateful class component are regular es6 classes that extend    component class from react library. They must contain a render    method which in turn return html .
+   Example: function welcome extends React.Component
+   {
+   render(){
+   return <h1>hello,{this.props.name}</h1>;
+   }
+   }
+
+------------------------------------------------------------------
+
+Functional Components:
+Functional component is a js function that accepts an input of properties and returns html that describes UI.
+Create a new folder named as components in src.
+Then create a file inside it named as Greet.js
+Then write the following code in it.
+
+import React from 'react'
+function Greet
+{
+    return <h1>Hello Aditi!!</h1>
+}
+
+This Hello Aditi!! is not going to be rendered in the browser because Greet component is no way connected to rest of our application. So we have to export the greet function from Greet.js and import this function in app.js and then include in app component.Add the following line in Greet.js
+export default Greet
+
+And add the following line in app.js to import Greet function
+import Greet from './components/Greet'
+
+To include Greet component in app component , we simply specify the component as the custom html tag ,like <Greet></Greet>.
+And if there is no content between the tags, we can simply change into self closing tag, like <Greet />.
+
+app.js
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
+import Greet from './components/Greet';
+
+class  App extends Component {
+  render(){
+  return (
+    <div className="App">
+     <Greet />
+    </div>
+  );
+}
+}
+export default App;
+
+After saving all the files, then in browser we will get to see the content that we have written in Greet function in Greet.js file.
+If we do default export then at the time of import, we can import with any name. for eg- we can import Greet function like this
+import MyComponent from './components/Greet';
+If we don't do default export, then we have to import it with the same name.
+
+------------------------------------------------------------------
+
+Class Components:
+This are basically ES6 classes. Just like functional components, these also optionally receive props as input and return html.
+Create Welcome.js in components folder. For a class to become a React component,firstly it should extend the Component class from react and secondly it should implement a render method which will return null or some html. Write the following code in Welcome.js:
+import React, { Component } from 'react'
+class Welcome extends Component{
+    render(){
+        return <h1>Class Component</h1>
+    }
+}
+export default Welcome
+
+Add the following line in app.js
+import Welcome from './components/Welcome';
+
+And add this line in app component in app.js file
+<Welcome />
+
+Save all the files and see in browser.
+
+------------------------------------------------------------------
+
+Hooks:
+Hooks are the new feature proposal that lets you use state and other React features without writing a class.
+
+------------------------------------------------------------------
+
+JSX:
+It stands for Javascript XML or it is an extension to Javascript language syntax.In this, we can write XML like code for elements and components.JSX tags have a tag name, attributes, and children. JSX makes your react code simpler and elegant. JSX ultimately transpiles to pure javascript which is understood by the browsers.
+Create Hello.js file in components folder.
+
+import React from 'react'
+const Hello = ()=>{
+    return(
+        <div>
+            <h1>Aditi here!!</h1>
+        </div>
+    )
+}
+export default Hello
+
+And import Hello in app.js file
+This we have done using JSX.
+Now we will do the same without using JSX
+
+import React from 'react'
+const Hello = ()=>{
+return React.createElement('div',{id:'hello',className:'dummyClass'},React.createElement('h1',null,'Aditi Garg'))
+//createElement is the method of React Library which takes 1st //argument as the element which is to be rendered, 2nd argument is //basically an object of key value pairs that can be applied to //the element,3rd is the children of the element.
+}
+export default Hello
+
+We import React in each jsx file also because JSX translates our code into React.createElement which uses React library.
+------------------------------------------------------------------
+
+Various differences in html and jsx:
+1. class keyword is replaced with className.
+2. for => htmlFor
+3. onclick => onClick
+4. tabindex => tabIndex
+
+------------------------------------------------------------------
+Props:
+props is the additionalproperty that your component can accept.In this example our intension is to pass name from app component to greet component and bring that name in the browser.
+
+Greet.js
+import React from 'react'
+const Greet = props => {
+return (
+    <div>
+<h1>Hello {props.name} {props.lastName}</h1>
+{props.children}
+</div>
+)
+}     
+export default Greet
+
+app.js
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
+import Greet from './components/Greet';
+import Welcome from './components/Welcome';
+import Hello from './components/Hello'
+class  App extends Component {
+  render(){
+  return (
+    <div className="App">
+     <Greet name="Mini" lastName="Agrawal"><p>Hello myself aditi garg</p></Greet>
+     <Greet name="Aditi" lastName="Garg" ><button>OK</button></Greet>
+     <Welcome name="Mini" lastName="Agrawal" />
+     <Welcome name="Aditi" lastName="Garg"/>
+     <Hello />
+    </div>
+  );
+}
+}
+export default App;
+
+Welcome.js
+import React, { Component } from 'react'
+class Welcome extends Component{
+    render(){
+    return <h1>Hello {this.props.name} {this.props.lastName}</h1>
+    }
+}
+export default Welcome
+
+------------------------------------------------------------------
+Props vs state
+1. Props are passed to component while state is managed within the    component.
+2. Props are function parameters while state is the variable    declared in function body
+3. Props are immutable while state can be changed.
+4. In functional components props is accesed using 'props' and in    class components props is accesed using 'this.props'. While In    functional components state is accesed using 'useState Hook'    and in class components state is accesed using 'this.state'. 
+
+------------------------------------------------------------------
+State:
+state is an Object that is privately maintained inside the Component. State can influence what is rendered in the browser.State can be changed within the component.
+
+Message.js
+import React, { Component } from 'react'
+class Message extends Component{
+    constructor(){
+        super()
+        this.state={
+            message:'Welcome visitor'
+        }
+    }
+    changeMessage(){
+        this.setState({
+            message:'Thank you'
+        })
+    }
+    render(){
+    return (
+        <div>
+        <h1>{this.state.message} </h1>
+        <button onClick={()=>this.changeMessage()}>Subscribe</button>
+        </div>
+    )
+    }
+}
+export default Message
+
+//setState is the method that accepts object and is used to alter //the state of a class Component
+------------------------------------------------------------------
+
+Counter.js
+import React,{Component} from 'react'
+class Counter extends Component {
+constructor(props){
+    super(props)
+this.state={
+count:0
+}
+}
+changeValue(){
+    this.setState({
+        count:this.state.count +1
+    },
+    ()=>{
+        console.log("callback value",this.state.count)
+    }
+    )
+    console.log(this.state.count)
+}
+render(){
+    return(
+    <div>
+         <div>Count= {this.state.count}</div>
+         <button onClick={()=>this.changeValue()}>Increment</button>
+</div>
+    )
+}
+}
+export default Counter
+
+Points to remember:
+1. Always make use of setState and never modify the state directly.
+2. Code has to be executed after the state has been updated? Place that code in the callback function which is the second argument to the setState method.
+3. When you have to update state based on the previous state value, pass in a function as an argument instead of the regular object.
+
+------------------------------------------------------------------
+Event Handling:
+On button onClick in jsx we pass a function as event handler rather than a string.This function should be passed within curly braces And don't add parenthesis to this function, otherwise it will become a function call. We have to add parenthesis if we use arrow function against onClick.
+
+FunctionClick.js
+import React from 'react'
+function FunctionClick()
+{
+    function clickHandler(){
+        console.log("button clicked")
+    }
+    return(
+        <div>
+            <button onClick={clickHandler}>click</button>
+            </div>
+    )
+}
+export default FunctionClick
+------------------------------------------------------------------
+
+Binding Event:
+We bind event handlers in React is because of the way 'this' keyword works in javascript.It is not because of how react works.
+If we use this keyword in a method, we have to bind it.
+
+import React,{Component} from 'react'
+class EventBind extends Component {
+constructor(props){
+    super(props)
+this.state={
+message:"Hello"
+}
+}
+changeValue(){
+    this.setState({
+        message:"good bye"
+    })
+console.log(this)
+}
+render(){
+    return(
+    <div>
+         <div>{this.state.message}</div>
+         <button onClick={this.changeValue}>Click me</button>
+</div>
+    )
+}
+}
+export default EventBind
+
+Undefined will be printed on console.So we have to bind event handler.
+
+There are 4 Approaches for binding:
+1. Using bind keyword in render function.
+2. Using arrow function in render function.
+3. Binding event handler in constructor.
+this.changeValue=this.changeValue.bind(this)
+4. Class property as arrow functions.
+
+import React,{Component} from 'react'
+class EventBind extends Component {
+constructor(props){
+    super(props)
+this.state={
+message:"Hello"
+}
+//Approach3
+this.changeValue=this.changeValue.bind(this)
+}
+changeValue(){
+    this.setState({
+        message:"good bye"
+    })
+
+}
+render(){
+    return(
+    <div>
+         <div>{this.state.message}</div>
+          {/*<button onClick={this.changeValue.bind(this)}>Approach1</button>
+        <button onClick={()=>this.changeValue()}>Approach2</button>*/}
+         <button onClick={this.changeValue}>Approach3</button>
+</div>
+    )
+}
+}
+export default EventBind
+
+------------------------------------------------------------------
+Method as props:
+We have seen how parent component can pass down props to its children component. Now what if child component wants to communicate with Parent Component, we will still use props.But this time we will pass in refernce to a method as props to the child component.
+
+ParentComponent.js
+import React,{Component} from 'react'
+import ChildComponent from './ChildComponent'
+class ParentComponent extends Component {
+constructor(props){
+    super(props)
+this.state={
+parentName:'Parent'
+}
+this.greetParent=this.greetParent.bind(this)
+}
+greetParent(childName){
+   alert(`Hello ${this.state.parentName} From ${childName}`)
+}
+render(){
+    return(
+    <div>
+        <ChildComponent greetHandler={this.greetParent}/>
+    </div>    
+    )
+}
+}
+export default ParentComponent
+
+
+ChildComponent.js
+import React from 'react'
+function ChildComponent(props)
+{
+    return(
+        <div>
+            <button onClick={()=>props.greetHandler('child')}>Greet Parent</button>
+            </div>
+    )
+}
+export default ChildComponent
+
+------------------------------------------------------------------
